@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block title %}Song Details{% endblock %}
+{% block pagetitle %}<i class="fas fa-music fa-1x"></i>{% endblock %}
+
+{% block content %}
+<div class="songdetails">
+    33az
+    <h1>Title: {{ song['title'] }}</h1>
+    <h1>Artist: {{ song['artistName'] }}</h1>
+    <h1>Album: {{ song['albumTitle'] }}</h1>
+    <span></span>
+    <h1>Genre: {{ song['genreName'] }}</h1>
+    <h1>Release: {{ song['releaseDate'] }}</h1>
+    <h1>Duration: {{ song['duration'] }}</h1>
+
+    
+
+    <!-- Show the download button to everyone -->
+    <a href="{{ url_for('download_song', song_id=song['songId']) }}" class="btn btn-primary" download="{{ song['title'] }}.mp3">Download</a>
+
+    <!-- Back button -->
+    <form action="" method="post">
+        <button class="backbutton" name="back">Back</button>
+    </form>
+</div>
+{% endblock %}

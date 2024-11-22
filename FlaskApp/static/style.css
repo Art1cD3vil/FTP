@@ -1,0 +1,307 @@
+/* Global styles */
+* {
+    box-sizing: border-box;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: #191414; /* Spotify background */
+    color: #fff;
+    line-height: 1.5;
+}
+
+/* General container styles */
+.container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Login/Register page styles */
+.login, .register {
+    width: 100%;
+    max-width: 400px;
+    margin: 80px auto;
+    background-color: #121212;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+}
+
+.login h1, .register h1 {
+    font-size: 28px;
+    color: #1DB954; /* Spotify's green */
+    text-align: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #333;
+}
+
+.login .links, .register .links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.login .links a, .register .links a {
+    color: #1DB954;
+    text-decoration: none;
+    font-weight: 600;
+    margin: 0 10px;
+}
+
+.login .links a:hover, .register .links a:hover {
+    color: #1ed760;
+}
+
+/* Form styles */
+.login form, .register form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.login form label, .register form label {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 8px;
+    color: #fff;
+}
+
+.login form input[type="text"],
+.login form input[type="email"],
+.register form input[type="text"],
+.register form input[type="email"],
+.register form select {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #333;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+    padding: 8px;
+    margin-bottom: 20px;
+}
+
+.login form input[type="submit"],
+.register form input[type="submit"] {
+    background-color: #1DB954;
+    color: #fff;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login form input[type="submit"]:hover,
+.register form input[type="submit"]:hover {
+    background-color: #1ed760;
+}
+
+/* Home Page */
+.navtop {
+    background-color: #121212;
+    height: 60px;
+    width: 100%;
+    border-bottom: 1px solid #333;
+}
+
+.navtop div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 85%;
+    margin: 0 auto;
+}
+
+.navtop div h1 {
+    font-size: 28px;
+    color: #fff;
+    font-weight: 600;
+}
+
+.navtop div a {
+    color: #b3b3b3;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+.navtop div a:hover {
+    color: #1DB954;
+}
+
+.content {
+    width: 85%;
+    margin: 0 auto;
+    padding: 30px 0;
+}
+
+.content h2 {
+    font-size: 26px;
+    margin-bottom: 20px;
+    color: #fff;
+    border-bottom: 1px solid #333;
+}
+
+.content > div {
+    background-color: #121212;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.content table {
+    width: 100%;
+    margin: 20px 0;
+    color: #b3b3b3;
+}
+
+.content table td,
+.content table th {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+.content table th {
+    background-color: #1DB954;
+    color: #fff;
+}
+
+.content table tbody tr:nth-child(odd) {
+    background-color: #181818;
+}
+
+.content table tbody tr:hover {
+    background-color: #333;
+}
+
+.view {
+    background-color: #1DB954;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.view:hover {
+    background-color: #1ed760;
+}
+
+/* Playlist and Songs */
+.playlist,
+.song {
+    display: flex;
+    justify-content: space-between;
+    background-color: #1a1a1a;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+.playlist .song {
+    align-items: center;
+}
+
+.playlist .song:hover,
+.playlistlayout button:hover {
+    background-color: #333;
+}
+
+.songdetails img {
+    height: 250px;
+    width: 250px;
+    border-radius: 10px;
+    margin-left: 20px;
+}
+.songdetails{
+    color: #1DB954;
+}
+
+.playlistlayout .links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 15px;
+}
+
+.playlistlayout .links a {
+    color: #b3b3b3;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0 15px;
+}
+
+.playlistlayout .links a:hover {
+    color: #1DB954;
+}
+
+/* Buttons */
+.playlistlayout button,
+.backbutton,
+.editplanbutton,
+.deleteprofile {
+    background-color: #1DB954;
+    color: #fff;
+    border: none;
+    padding: 15px 25px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.playlistlayout button:hover,
+.backbutton:hover,
+.editplanbutton:hover,
+.deleteprofile:hover {
+    background-color: #1ed760;
+}
+
+/* Profile Page */
+.profile {
+    background-color: #121212;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 30px;
+}
+
+.profile h1 {
+    font-size: 28px;
+    text-align: center;
+    color: #fff;
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+    .navtop div {
+        width: 90%;
+    }
+
+    .content {
+        width: 90%;
+    }
+
+    .login, .register {
+        width: 90%;
+        max-width: 90%;
+    }
+
+    .login form input[type="text"],
+    .login form input[type="email"],
+    .register form input[type="text"],
+    .register form input[type="email"],
+    .register form select {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .playlist .song {
+        flex-direction: column;
+    }
+}

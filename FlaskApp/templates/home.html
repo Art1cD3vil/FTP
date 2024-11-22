@@ -1,0 +1,115 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block pagetitle %}<i class="fas fa-home fa-1x"></i>{% endblock %}
+
+{% block content %}
+<div class="home">
+    <div class="content-top">
+        {% if not guest %}
+        <form action="" method="post"> 
+            <button name="new" class="newplaylistbutton">Create New Playlist</button> 
+        </form>
+        {% else %}
+        <p>You are logged in as a guest. Create new playlists by signing up.</p>
+        {% endif %}
+    </div>
+    
+    <!-- Playlist table -->
+    <table id="playlists" class="styled-table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th> 
+                <th>Status</th> 
+                <th>Tracks</th> 
+                <th>Duration</th> 
+                <th>Play</th> <!-- Play column -->
+                <td></td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for playlist in playlists %}
+            <tr>
+                <td>{{ playlist['name'] }}</td>
+                <td>{{ playlist['status'] }}</td>
+                <td>{{ playlist['tracks'] }}</td>
+                <td>{{ playlist['duration'] }}</td>
+                <td>
+                    <!-- Play button for non-guest users only -->
+                    {% if not guest %}
+                    <form action="{{ url_for('play_playlist', playlistId=playlist['playlistId']) }}" method="get">
+                        <button class="play" type="submit">
+                            <i class="fas fa-play"></i> Play
+                        </button>
+                    </form>
+                    {% else %}
+                    <button class="play disabled" disabled title="Login to play">
+                        <i class="fas fa-play"></i> Play
+                    </button>
+                    {% endif %}
+                </td>
+                
+                
+                <td>
+                    <!-- View button, available to both guest and non-guest -->
+                    <form action="" method="post">
+                        <button class="view" name="view" value="{{ playlist['playlistId'] }}">View</button>
+                    </form>
+                </td>
+                <td>
+                    <!-- Remove button for non-guest users only -->
+                    {% if not guest %}
+                    <form action="" method="post">
+                        <button class="remove" name="remove" value="{{ playlist['playlistId'] }}">Remove</button>
+                    </form>
+                    {% else %}
+                    <button class="remove disabled" disabled title="Login to remove">
+                        Remove
+                    </button>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Music Player -->
+    {% if songs %}
+    <div class="music-player">
+        <h3>Now Playing</h3>
+        <ul>
+            {% for song in songs %}
+            <li>
+                {{ song['title'] }} - {{ song['duration'] }}
+                <audio controls>
+                    <source src="{{ song['song_link'] }}" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function () {
+    var table = $('#playlists').DataTable({
+        columns: [
+            { searchable: true },
+            { searchable: true },
+            { orderable: true, searchable: true },
+            { orderable: true, searchable: false },
+            { orderable: false, searchable: false }, // Play button column
+            { orderable: false, searchable: false }, // View button
+            { orderable: false, searchable: false }  // Remove button
+        ],
+        "lengthChange": false
+    });
+});
+</script>
+{% endblock %}

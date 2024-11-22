@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Access Account</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+</head>
+<body>
+    <div class="login">
+        <h1>Access Account</h1>
+        <div class="links">
+            <a href="{{ url_for('login') }}" class="active">Sign In</a>
+            <a href="{{ url_for('register') }}">Register</a>
+        </div>
+        <form action="{{ url_for('login') }}" method="post">
+            <label for="email">
+                <i class="fas fa-envelope"></i>
+            </label>
+            <input type="text" name="email" placeholder="Email" id="email" required>
+            <label for="phone">
+                <i class="fas fa-phone"></i>
+            </label>
+            <input type="text" name="phone" placeholder="Phone" id="phone" required>
+            <div class="msg">{{ errorMessage }}</div>
+            <input type="submit" value="Access">
+        </form>
+
+        <!-- Continue as Guest button -->
+        <form action="{{ url_for('guest') }}" method="post" class="guest-login">
+            <input type="submit" value="Continue as Guest" class="guest-button">
+        </form>
+    </div>
+</body>
+</html>

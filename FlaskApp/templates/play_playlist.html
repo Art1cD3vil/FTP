@@ -1,0 +1,159 @@
+{% extends 'layout.html' %}
+
+{% block title %}Playing Playlist{% endblock %}
+
+{% block content %}
+<div class="playlist">
+    <h2>Now Playing</h2>
+    <div class="songs">
+        <div class="controls">
+            <button id="prev-btn">Previous</button>
+            <button id="play-pause-btn">Play</button>
+            <button id="next-btn">Next</button>
+        </div>
+
+        {% for song in songs %}
+        <div class="song-item" data-song-id="{{ url_for('serve_song', filename=song.song_link) }}" data-title="{{ song.title }}" data-duration="{{ song.duration }}">
+            <p style="color:crimson;">{{ song.title }} - Duration: {{ song.duration }}</p>
+            <div class="progress-container">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+
+.script{
+    text-align: center;
+}    
+/* Custom audio player styling */
+.playlist {
+    background-color: #ffffff; /* White background */
+    padding: 20px;
+    border-radius: 10px;
+    color: black; /* Black text */
+}
+.controls {
+    margin-bottom: 15px;
+}
+.controls button {
+    padding: 5px 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    background-color: #d3d3d3; /* Light grey button background */
+    color: #000000; /* Black text */
+    border: none;
+    border-radius: 5px;
+}
+
+.div.song-item{
+    color:red;
+}
+.song-item p {
+    color: #000000; /* Black color for song title and duration */
+}
+.progress-container {
+    width: 100%;
+    height: 5px;
+    background-color: #d3d3d3; /* Light grey background for progress container */
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 5px;
+    position: relative;
+}
+.progress-bar {
+    height: 100%;
+    background-color: #000000; /* Black progress bar */
+    width: 0%;
+    transition: width 0.1s;
+}
+</style>
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const songItems = document.querySelectorAll('.song-item');
+    const playPauseBtn = document.getElementById('play-pause-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const prevBtn = document.getElementById('prev-btn');
+    let currentSongIndex = 0;
+    let audio = new Audio(songItems[currentSongIndex].dataset.songId);
+    let isPlaying = false;
+
+    function updatePlayer() {
+        const currentSong = songItems[currentSongIndex];
+        audio.src = currentSong.dataset.songId;
+        playPauseBtn.innerText = 'Play';
+        isPlaying = false;
+
+        // Reset and update the progress bar for the new song
+        currentSong.querySelector('.progress-bar').style.width = '0%';
+    }
+
+    function playSong() {
+        audio.play();
+        isPlaying = true;
+        playPauseBtn.innerText = 'Pause';
+
+        // Update progress bar while song is playing
+        audio.ontimeupdate = function () {
+            const progressBar = songItems[currentSongIndex].querySelector('.progress-bar');
+            const progressPercent = (audio.currentTime / audio.duration) * 100;
+            progressBar.style.width = progressPercent + '%';
+        };
+    }
+
+    function pauseSong() {
+        audio.pause();
+        isPlaying = false;
+        playPauseBtn.innerText = 'Play';
+    }
+
+    function playNextSong() {
+        if (currentSongIndex < songItems.length - 1) {
+            currentSongIndex++;
+        } else {
+            currentSongIndex = 0; // Loop back to the first song
+        }
+        audio.pause();
+        updatePlayer();
+        playSong();
+    }
+
+    function playPreviousSong() {
+        if (currentSongIndex > 0) {
+            currentSongIndex--;
+        } else {
+            currentSongIndex = songItems.length - 1; // Loop back to the last song
+        }
+        audio.pause();
+        updatePlayer();
+        playSong();
+    }
+
+    // Event listeners for Play/Pause, Next, and Previous buttons
+    playPauseBtn.addEventListener('click', function () {
+        if (isPlaying) {
+            pauseSong();
+        } else {
+            playSong();
+        }
+    });
+
+    nextBtn.addEventListener('click', playNextSong);
+    prevBtn.addEventListener('click', playPreviousSong);
+
+    // Automatically go to the next song when the current song ends
+    audio.onended = playNextSong;
+
+    // Start with the first song loaded but not playing
+    updatePlayer();
+});
+</script>
+{% endblock %}
