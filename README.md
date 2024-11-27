@@ -22,19 +22,3 @@ The **Music Streaming Management System** is designed to optimize the organizati
 
 ---
 
-## Getting Started
-
-### Prerequisites
-- **Python**: Ensure Python 3.x is installed.
-- **MySQL**: A MySQL server for database management.
-- **Git**: For version control.
-
----
-
-### Setting Up the Environment
-
-#### For **Windows**:
-1. Open a terminal and navigate to your project directory.
-2. Create a virtual environment:
-   ```bash
-   python -m venv venv
